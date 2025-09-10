@@ -31,9 +31,15 @@ export class MyMCP extends McpAgent<Env> {
         if (q.includes("name")) {
           answer = `My name is ${CV.basics.name}.`;
         } else if (q.includes("mail")) {
-          answer = `You can contact me at ${CV.basics.email}.`;
-        } else if (q.includes("phone") || q.includes("mobile")) {
+          answer = `My email address is ${CV.basics.email}.`;
+        } else if (
+          q.includes("phone") ||
+          q.includes("mobile") ||
+          q.includes("call")
+        ) {
           answer = `My phone number is ${CV.basics.phone}.`;
+        } else if (q.includes("contact")) {
+          answer = `You can contact me from ${CV.basics.email} and ${CV.basics.phone}.`;
         } else if (
           q.includes("address") ||
           q.includes("city") ||
@@ -76,7 +82,10 @@ export class MyMCP extends McpAgent<Env> {
           q.includes("intern") ||
           q.includes("experience") ||
           q.includes("train") ||
-          q.includes("work")
+          q.includes("work") ||
+          q.includes("job") ||
+          q.includes("position") ||
+          q.includes("role")
         ) {
           const job = CV.work[0];
           answer = `I completed internship at ${job.company} as a ${
@@ -87,7 +96,8 @@ export class MyMCP extends McpAgent<Env> {
         } else if (
           q.includes("edu") ||
           q.includes("uni") ||
-          q.includes("school")
+          q.includes("school") ||
+          q.includes("college")
         ) {
           answer = CV.education
             .map(
