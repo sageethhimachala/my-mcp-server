@@ -8,7 +8,7 @@ interface Env {
   RESEND_API_KEY: string;
 }
 
-// Define our MCP agent with tools
+// MCP agent with tools
 export class MyMCP extends McpAgent<Env> {
   server = new McpServer({
     name: "Chat with CV and Mails",
@@ -50,11 +50,16 @@ export class MyMCP extends McpAgent<Env> {
         } else if (
           q.includes("summary") ||
           q.includes("about") ||
-          q.includes("description")
+          q.includes("desc") ||
+          q.includes("intro")
         ) {
-          answer = CV.basics.summary;
+          answer = `My name is ${CV.basics.name}. You can contact me at ${CV.basics.email}. I live at ${CV.basics.location}. Here’s my GitHub: ${
+            CV.basics.github ? CV.basics.github : "Not provided"
+          } and Website: ${
+            CV.basics.website ? CV.basics.website : "Not provided"
+          }. Summary: ${CV.basics.summary}`;
         } else if (
-          q.includes("internship") ||
+          q.includes("intern") ||
           q.includes("experience") ||
           q.includes("train") ||
           q.includes("work")
@@ -66,23 +71,24 @@ export class MyMCP extends McpAgent<Env> {
             job.endDate
           }). Key highlights:\n- ${job.highlights.join("\n- ")}`;
         } else if (
-          q.includes("education") ||
-          q.includes("university") ||
+          q.includes("edu") ||
+          q.includes("uni") ||
           q.includes("school")
         ) {
           answer = CV.education
-            .filter((data) => data.institution.toLowerCase().includes("school"))
             .map(
               (ed) =>
                 `${ed.degree} at ${ed.institution} (${ed.startDate} to ${ed.endDate}) – ${ed.summary}`
             )
             .join("\n\n");
-        } else if (q.includes("tech") || q.includes("skills")) {
-          answer = `My main technical skills are: ${CV.tech_skills.join(
+        } else if (
+          q.includes("skills") ||
+          q.includes("talent") ||
+          q.includes("know")
+        ) {
+          answer = `My technical skills are: ${CV.tech_skills.join(
             ", "
-          )}.`;
-        } else if (q.includes("soft") || q.includes("skills")) {
-          answer = `My soft skills are: ${CV.soft_skills.join(", ")}.`;
+          )}.\nMy soft skills are: ${CV.soft_skills.join(", ")}.`;
         } else if (q.includes("projects")) {
           answer = CV.projects
             .map(
@@ -94,7 +100,7 @@ export class MyMCP extends McpAgent<Env> {
                 }`
             )
             .join("\n\n");
-        } else if (q.includes("languages")) {
+        } else if (q.includes("lang")) {
           answer = CV.languages
             .map((lang, i) => `${lang.language} - ${lang.fluency}`)
             .join("\n");
@@ -104,7 +110,7 @@ export class MyMCP extends McpAgent<Env> {
       }
     );
 
-    // Sends an email
+    // Sends an email using Resend
     this.server.tool(
       "send_mail",
       {
@@ -126,8 +132,8 @@ export class MyMCP extends McpAgent<Env> {
       }) => {
         try {
           const emailData: any = {
-            from: "Sageeth <onboarding@resend.dev>", // Use Resend's verified domain
-            to: [to], // Resend expects an array
+            from: "Sageeth <onboarding@resend.dev>",
+            to: [to],
             subject,
             text: body,
           };
