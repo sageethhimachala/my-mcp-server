@@ -40,6 +40,10 @@ export class MyMCP extends McpAgent<Env> {
           answer = `My phone number is ${CV.basics.phone}.`;
         } else if (q.includes("contact")) {
           answer = `You can contact me from ${CV.basics.email} and ${CV.basics.phone}.`;
+        } else if (q.includes("gpa")) {
+          answer = `My cgpa is ${CV.basics.cgpa}.`;
+        } else if (q.includes("department")) {
+          answer = `My department is ${CV.basics.Department} of ${CV.basics.university}.`;
         } else if (
           q.includes("address") ||
           q.includes("city") ||

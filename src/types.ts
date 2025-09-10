@@ -4,6 +4,9 @@ export interface CvData {
     email: string;
     phone: string;
     location: string;
+    university?: string;
+    Department?: string;
+    cgpa?: string;
     github?: string;
     website?: string;
     summary: string;
@@ -21,7 +24,7 @@ export interface CvData {
     degree: string;
     startDate: string;
     endDate: string;
-    summary: string;
+    summary?: string;
   }[];
   projects: {
     name: string;
