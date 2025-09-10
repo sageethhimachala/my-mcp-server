@@ -2,13 +2,20 @@ import { McpAgent } from "agents/mcp";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { CV } from "./cv";
+import { Resend } from "resend";
+
+interface Env {
+  RESEND_API_KEY: string;
+}
 
 // Define our MCP agent with tools
-export class MyMCP extends McpAgent {
+export class MyMCP extends McpAgent<Env> {
   server = new McpServer({
     name: "Chat with CV and Mails",
     version: "1.0.0",
   });
+
+  private resend = new Resend(this.env.RESEND_API_KEY);
 
   async init() {
     // Answers the questions about CV
@@ -94,6 +101,73 @@ export class MyMCP extends McpAgent {
         }
 
         return { content: [{ type: "text", text: answer }] };
+      }
+    );
+
+    // Sends an email
+    this.server.tool(
+      "send_mail",
+      {
+        to: z.string().email().describe("Recipient email address"),
+        subject: z.string().describe("Email subject"),
+        body: z.string().describe("Email body content"),
+        html: z.string().optional().describe("Optional HTML content"),
+      },
+      async ({
+        to,
+        subject,
+        body,
+        html,
+      }: {
+        to: string;
+        subject: string;
+        body: string;
+        html?: string;
+      }) => {
+        try {
+          const emailData: any = {
+            from: "Sageeth <onboarding@resend.dev>", // Use Resend's verified domain
+            to: [to], // Resend expects an array
+            subject,
+            text: body,
+          };
+
+          // Add HTML if provided
+          if (html) {
+            emailData.html = html;
+          }
+
+          const { data, error } = await this.resend.emails.send(emailData);
+
+          if (error) {
+            return {
+              content: [
+                {
+                  type: "text",
+                  text: `Failed to send email: ${error.message}`,
+                },
+              ],
+            };
+          }
+
+          return {
+            content: [
+              {
+                type: "text",
+                text: `Email sent successfully to ${to}. ID: ${data?.id}`,
+              },
+            ],
+          };
+        } catch (err: any) {
+          return {
+            content: [
+              {
+                type: "text",
+                text: `Failed to send email: ${err.message}`,
+              },
+            ],
+          };
+        }
       }
     );
   }
