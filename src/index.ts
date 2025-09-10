@@ -35,7 +35,6 @@ export class MyMCP extends McpAgent<Env> {
         } else if (q.includes("phone") || q.includes("mobile")) {
           answer = `My phone number is ${CV.basics.phone}.`;
         } else if (
-          q.includes("location") ||
           q.includes("address") ||
           q.includes("city") ||
           q.includes("home")
@@ -57,7 +56,22 @@ export class MyMCP extends McpAgent<Env> {
             CV.basics.github ? CV.basics.github : "Not provided"
           } and Website: ${
             CV.basics.website ? CV.basics.website : "Not provided"
-          }. Summary: ${CV.basics.summary}`;
+          }. \n\nSummary: ${CV.basics.summary}`;
+        } else if (q.includes("projects")) {
+          const myProjects = CV.projects
+            .map(
+              (p, i) =>
+                `${i + 1} - ${p.name}
+                \nDescription: ${p.description}
+                \nTechnologies: ${p.technologies.join(", ")}${
+                  p.link ? `\nLink: ${p.link}` : ""
+                }`
+            )
+            .join("\n\n");
+          const companyProjects = CV.work[0].highlights
+            .map((h, i) => `${i + 1} - ${h}`)
+            .join("\n");
+          answer = `My personal projects:\n${myProjects}\n\nCompany projects:\n${companyProjects}`;
         } else if (
           q.includes("intern") ||
           q.includes("experience") ||
@@ -69,7 +83,7 @@ export class MyMCP extends McpAgent<Env> {
             job.position
           } (${job.startDate} to ${
             job.endDate
-          }). Key highlights:\n- ${job.highlights.join("\n- ")}`;
+          }). \n\nKey highlights:\n- ${job.highlights.join("\n- ")}`;
         } else if (
           q.includes("edu") ||
           q.includes("uni") ||
@@ -78,7 +92,7 @@ export class MyMCP extends McpAgent<Env> {
           answer = CV.education
             .map(
               (ed) =>
-                `${ed.degree} at ${ed.institution} (${ed.startDate} to ${ed.endDate}) – ${ed.summary}`
+                `${ed.degree} at ${ed.institution} (${ed.startDate} to ${ed.endDate}) – ${ed.summary ? ed.summary : ""}`
             )
             .join("\n\n");
         } else if (
@@ -86,20 +100,8 @@ export class MyMCP extends McpAgent<Env> {
           q.includes("talent") ||
           q.includes("know")
         ) {
-          answer = `My technical skills are: ${CV.tech_skills.join(
-            ", "
-          )}.\nMy soft skills are: ${CV.soft_skills.join(", ")}.`;
-        } else if (q.includes("projects")) {
-          answer = CV.projects
-            .map(
-              (p, i) =>
-                `${p.name}\nDescription: ${
-                  p.description
-                }\nTechnologies: ${p.technologies.join(", ")}${
-                  p.link ? `\nLink: ${p.link}` : ""
-                }`
-            )
-            .join("\n\n");
+          answer = `My technical skills are: ${CV.tech_skills.join(", ")}.
+          \nMy soft skills are: ${CV.soft_skills.join(", ")}.`;
         } else if (q.includes("lang")) {
           answer = CV.languages
             .map((lang, i) => `${lang.language} - ${lang.fluency}`)
@@ -169,7 +171,7 @@ export class MyMCP extends McpAgent<Env> {
             content: [
               {
                 type: "text",
-                text: `Failed to send email: ${err.message}`,
+                text: `Failed to send email`,
               },
             ],
           };
