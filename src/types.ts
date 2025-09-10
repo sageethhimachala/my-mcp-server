@@ -4,9 +4,9 @@ export interface CvData {
     email: string;
     phone: string;
     location: string;
-    university?: string;
-    Department?: string;
-    cgpa?: string;
+    university: string;
+    Department: string;
+    cgpa: string;
     github?: string;
     website?: string;
     summary: string;
