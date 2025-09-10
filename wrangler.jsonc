@@ -44,7 +44,7 @@
    * Environment Variables
    * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
    */
-  "vars": { "RESEND_API_KEY": "re_U9MVYMVQ_KJG7QmJDYmL1n1yD45KayQCo" },
+  "vars": { "RESEND_API_KEY": "re_5k4S1VVf_GHZtEWaf6Gs7RF3Q884ZyV4U" },
   /**
    * Note: Use secrets to store sensitive data.
    * https://developers.cloudflare.com/workers/configuration/secrets/
