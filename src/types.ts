@@ -28,5 +28,7 @@ export interface CvData {
     technologies: string[];
     link?: string;
   }[];
-  skills: string[];
+  tech_skills: string[];
+  soft_skills: string[];
+  languages: { language: string; fluency: string }[];
 }

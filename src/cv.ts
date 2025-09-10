@@ -72,7 +72,7 @@ export const CV: CvData = {
       link: "https://github.com/sageethhimachala/Booking-App",
     },
   ],
-  skills: [
+  tech_skills: [
     "JavaScript",
     "React.js",
     "Node.js",
@@ -86,6 +86,7 @@ export const CV: CvData = {
     "Material UI",
     "Figma",
   ],
+  soft_skills: ["Problem Solving", "Fast Learner", "Teamwork", "Communication"],
   languages: [
     { language: "Sinhala", fluency: "Native" },
     { language: "English", fluency: "Fluent" },

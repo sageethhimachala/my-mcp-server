@@ -65,8 +65,12 @@ export class MyMCP extends McpAgent {
                 `${ed.degree} at ${ed.institution} (${ed.startDate} to ${ed.endDate}) – ${ed.summary}`
             )
             .join("\n\n");
-        } else if (q.includes("skills")) {
-          answer = `My main skills are: ${CV.skills.join(", ")}.`;
+        } else if (q.includes("tech") || q.includes("skills")) {
+          answer = `My main technical skills are: ${CV.tech_skills.join(
+            ", "
+          )}.`;
+        } else if (q.includes("soft") || q.includes("skills")) {
+          answer = `My soft skills are: ${CV.soft_skills.join(", ")}.`;
         } else if (q.includes("projects")) {
           answer = CV.projects
             .map(
