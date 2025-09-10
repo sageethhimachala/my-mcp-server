@@ -101,7 +101,8 @@ export class MyMCP extends McpAgent<Env> {
           q.includes("edu") ||
           q.includes("uni") ||
           q.includes("school") ||
-          q.includes("college")
+          q.includes("college") ||
+          q.includes("degree")
         ) {
           answer = CV.education
             .map(
