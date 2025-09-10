@@ -4,7 +4,8 @@ export interface CvData {
     email: string;
     phone: string;
     location: string;
-    website: string;
+    github?: string;
+    website?: string;
     summary: string;
   };
   work: {

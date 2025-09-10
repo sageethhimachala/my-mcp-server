@@ -6,7 +6,7 @@ export const CV: CvData = {
     email: "sageethhimachala@gmail.com",
     phone: "+94702367194",
     location: "165/A, Elegoda East, Mamadala, Ambalantota",
-    website: "https://github.com/sageethhimachala",
+    github: "https://github.com/sageethhimachala",
     summary:
       "Final-year Computer Science and Engineering undergraduate at the University of Moratuwa. Strong foundation in software development and full-stack web/mobile applications. Passionate about scalable, user-friendly systems. Completed internship at SenzMate AIoT Intelligence.",
   },

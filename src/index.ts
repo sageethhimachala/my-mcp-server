@@ -35,7 +35,11 @@ export class MyMCP extends McpAgent {
         ) {
           answer = `I live at ${CV.basics.location}.`;
         } else if (q.includes("website") || q.includes("github")) {
-          answer = `Here’s my GitHub: ${CV.basics.website}`;
+          answer = `Here’s my GitHub: ${
+            CV.basics.github ? CV.basics.github : "Not provided"
+          } and Website: ${
+            CV.basics.website ? CV.basics.website : "Not provided"
+          }.`;
         } else if (
           q.includes("summary") ||
           q.includes("about") ||
@@ -45,7 +49,8 @@ export class MyMCP extends McpAgent {
         } else if (
           q.includes("internship") ||
           q.includes("experience") ||
-          q.includes("train")
+          q.includes("train") ||
+          q.includes("work")
         ) {
           const job = CV.work[0];
           answer = `I completed internship at ${job.company} as a ${
