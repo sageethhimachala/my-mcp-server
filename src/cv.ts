@@ -56,6 +56,22 @@ export const CV: CvData = {
       summary: "A-7, B-2",
     },
   ],
+  projects: [
+    {
+      name: "Interactive Library Management System",
+      description:
+        "This is the semester 5 project. I contributed for the frontend and backend development of the web application and database design",
+      technologies: ["React.js", "Node.js", "Express", "MySQL", "Tailwind CSS"],
+      link: "https://github.com/KalpanaYehan/ILMS",
+    },
+    {
+      name: "Hotel Booking App",
+      description:
+        " The system is designed for managing hotel reservations using the web application.",
+      technologies: ["React.js", "MongoDB", "Node.js", "Express", "Redux"],
+      link: "https://github.com/sageethhimachala/Booking-App",
+    },
+  ],
   skills: [
     "JavaScript",
     "React.js",
@@ -69,5 +85,9 @@ export const CV: CvData = {
     "Tailwind CSS",
     "Material UI",
     "Figma",
+  ],
+  languages: [
+    { language: "Sinhala", fluency: "Native" },
+    { language: "English", fluency: "Fluent" },
   ],
 };

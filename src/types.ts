@@ -22,5 +22,11 @@ export interface CvData {
     endDate: string;
     summary: string;
   }[];
+  projects: {
+    name: string;
+    description: string;
+    technologies: string[];
+    link?: string;
+  }[];
   skills: string[];
 }

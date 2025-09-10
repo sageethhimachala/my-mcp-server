@@ -67,6 +67,21 @@ export class MyMCP extends McpAgent {
             .join("\n\n");
         } else if (q.includes("skills")) {
           answer = `My main skills are: ${CV.skills.join(", ")}.`;
+        } else if (q.includes("projects")) {
+          answer = CV.projects
+            .map(
+              (p, i) =>
+                `${p.name}\nDescription: ${
+                  p.description
+                }\nTechnologies: ${p.technologies.join(", ")}${
+                  p.link ? `\nLink: ${p.link}` : ""
+                }`
+            )
+            .join("\n\n");
+        } else if (q.includes("languages")) {
+          answer = CV.languages
+            .map((lang, i) => `${lang.language} - ${lang.fluency}`)
+            .join("\n");
         }
 
         return { content: [{ type: "text", text: answer }] };
