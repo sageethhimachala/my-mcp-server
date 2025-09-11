@@ -1,4 +1,4 @@
-#My MCP Remote Server
+# My MCP Remote Server
 
 This is a Model Context Protocol (MCP) server that exposes two tools:
 
@@ -12,17 +12,20 @@ https://my-mcp-server.sageethhimachala.workers.dev/sse
 
 You can connect to it from Claude Desktop or any MCP-compatible client.
 
-📦 Installation
+## 📦 Installation
 
 No installation is needed if you’re only using the hosted server URL.
 If you want to run it locally for development:
 
 git clone https://github.com/sageethhimachala/my-mcp-server
+
 cd my-mcp-server
+
 npm install
+
 npm run dev # or your start command
 
-🔗 Connecting to Claude Desktop
+## 🔗 Connecting to Claude Desktop
 
 In Claude Desktop, open Settings → Developer → Edit Config, and add this to claude_desktop_config.json file:
 
@@ -41,8 +44,9 @@ In Claude Desktop, open Settings → Developer → Edit Config, and add this to 
 ```
 
 This tells Claude Desktop to connect to the hosted MCP server.
+After adding and saving the changes to the file, make sure to open Task Manager, end the “Claude Desktop” process, and then restart Claude Desktop.
 
-⚙️ Tools Provided
+## ⚙️ Tools Provided
 
 1. cv_chat
 
@@ -67,7 +71,7 @@ Purpose: Send emails using the Resend API.
 Input:
 
 {
-"to": "recipient@example.com",
+"to": "sageethhimachala@gmail.com",
 "subject": "Hello",
 "body": "This is a test email"
 }
@@ -75,5 +79,5 @@ Input:
 Output:
 
 {
-text": "Email sent successfully to recipient@example.com."
+text": "Email sent successfully to sageethhimachala@gmail.com. ID: b351XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 }
